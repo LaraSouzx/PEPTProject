@@ -1,20 +1,20 @@
-public class Sol extends DesenhoAnimado{
+public class Nave extends DesenhoAnimado{
 	
 	private Thread t = new Thread(this);
 	
-	public Sol() {
+	public Nave() {
 		
 	}
 	
-	public Sol(int x, int y, String path) {
+	public Nave(int x, int y, String path) {
 		super(x, y, path);
 		t.start();
 	}
 
 	@Override
 	public void run() {
-		while(this.getY() < 90) {
-			this.setY(getY() + 3);
+		while(this.getX() < 5000) {
+			this.setX(getX() + 3);
 			try {
 				t.sleep(100);
 			}catch(InterruptedException e) {

@@ -2,7 +2,11 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
+
 import javax.imageio.ImageIO;
 
 //ESTA CLASSE DEVE SE OBRIGATORIAMENTE MANTIDA NO PROJETO. QUALQUER ALTERA��O REALIZADA DEVE OBEDECER A HIERARQUIA.
@@ -71,7 +75,21 @@ public class Desenho {
 	public void setRetangle(Rectangle retangle) {
 		this.retangle = retangle;
 	}
-	
+	public void salvar() {
+		File file = new File("teste.txt");
+		try {
+			FileOutputStream fos = new FileOutputStream(file);
+			ObjectOutputStream oos = new ObjectOutputStream(fos);
+			
+			oos.writeObject(this);
+			oos.close();
+			fos.close();
+		}catch(FileNotFoundException e){
+			System.out.println("ARQUIVO NÃO ENCONTRADO !");
+		}catch(IOException e) {
+			System.out.println("ERRO DE I/O !");
+		}
+	}
 	public void desenhar(Graphics g) {
 		//Desenhando a imagem na tela
 		g.drawImage(this.getImg(), this.getX(), this.getY(), null);
